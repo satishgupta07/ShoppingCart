@@ -1,4 +1,3 @@
-<%@page import="com.satishkrgupta.shopingcart.helper.FactoryProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,20 +10,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     
-    <title>Shopping Cart | Home Page</title>
+    <title>Shopping Cart | About Page</title>
     </head>
     <body>
         
         <%@include file="components/navbar.jsp" %>
         
         <h1>Hello World!</h1>
-        <h1>Creating Session Factory object</h1>
+        <h2>About Page</h2>
         
-        <% 
-            out.println(FactoryProvider.getFactory());
-        %>
         
-         <!-- Optional JavaScript -->
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
