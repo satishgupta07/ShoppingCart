@@ -17,6 +17,7 @@
         
         <%@include file="components/navbar.jsp" %>
         
+        <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-md-4 offset-md-4">
                 <div class="card">
@@ -25,26 +26,26 @@
                             <i class="fa fa-user-plus" style="font-size:36px"></i>
                             <h3 class="text-center mt-2 mb-3">Sign up here !!</h3>
                         </div>
-                       <form>
+                        <form action="RegisterServlet" method="post">
                          <div class="form-group">
                            <label for="name">User Name</label>
-                           <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter here">
+                           <input name="user_name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter here">
                          </div>
                          <div class="form-group">
                            <label for="email">Email ID</label>
-                           <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter here">
+                           <input name="user_email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter here">
                          </div>
                          <div class="form-group">
                            <label for="password">Password</label>
-                           <input type="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Enter here">
+                           <input name="user_password" type="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Enter here">
                          </div>
                          <div class="form-group">
                            <label for="phone">Phone Number</label>
-                           <input type="number" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter here">
+                           <input name="user_phone" type="number" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter here">
                          </div>
                          <div class="form-group">
                            <label for="address">Address</label>
-                           <textarea style="height: 150px" class="form-control" placeholder="Enter your address"></textarea>
+                           <textarea name="user_address" style="height: 150px" class="form-control" placeholder="Enter your address"></textarea>
                          </div>
 
                        <div class="container text-center">
@@ -56,6 +57,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         
         
