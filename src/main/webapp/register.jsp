@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     
-    <title>Shopping Cart | About Page</title>
+    <title>Shopping Cart | Register Page</title>
     </head>
     <body>
         
@@ -19,7 +19,7 @@
         
         <div class="container-fluid">
         <div class="row mt-5">
-            <div class="col-md-4 offset-md-4">
+            <div class="col-md-6 offset-md-3">
                 <div class="card">
                     
                     <%@include file="components/message.jsp" %>
@@ -54,6 +54,8 @@
                        <div class="container text-center">
                            <button class="btn btn-outline-success">Register</button>
                            <button class="btn btn-outline-warning">Reset</button>
+                            <br> <br>
+                            Already have an account? <a href="login.jsp">Login Here!</a>
                        </div>
 
                      </form>
