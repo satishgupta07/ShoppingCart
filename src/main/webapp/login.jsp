@@ -24,6 +24,7 @@
                             <h3> Login Here </h3>
                         </div>
                         <div class="card-body">
+                            <%@include file="components/message.jsp" %>
                             <form action="LoginServlet" method="post">
                                 <div class="form-group">
                                   <label for="name">User Name</label>
