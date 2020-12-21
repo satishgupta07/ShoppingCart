@@ -41,6 +41,11 @@
         <%@include file="components/navbar.jsp" %>
         
         <div class="container mb-3 admin">
+            
+            <div class="container-fluid mt-3">
+                <%@include file="components/message.jsp" %>
+            </div>
+            
             <div class="row mt-3">
                 <div class="col-md-4">
                     <div class="card">
@@ -117,7 +122,8 @@
                 </button>
               </div>
               <div class="modal-body">
-                  <form action="#">
+                  <form action="ProductOperationServlet" method="post">
+                      <input type="hidden" name="operation" value="addCategory">
                       <div class="form-group">
                           <input type="text" class="form-control" name="catTitle" placeholder="Enter category title" required />
                       </div>
