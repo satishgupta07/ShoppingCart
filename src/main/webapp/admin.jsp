@@ -26,12 +26,21 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <title>Shopping Cart | Admin Page</title>
+        <style>
+            .admin .card {
+                border: 1px solid #304ffe;
+            }
+            .admin .card:hover {
+                background: #e2e2e2;
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
         
         <%@include file="components/navbar.jsp" %>
         
-        <div class="container mb-3">
+        <div class="container mb-3 admin">
             <div class="row mt-3">
                 <div class="col-md-4">
                     <div class="card">
@@ -70,7 +79,7 @@
             
             <div class="row mt-3">
                 <div class="col-md-6">
-                     <div class="card">
+                     <div class="card" data-toggle="modal" data-target="#addCategoryModal">
                         <div class="card-body text-center">
                             <div class="container">
                                 <img style="max-width: 125px;" class="img-fluid" src="img/categories.png" alt="users">
@@ -92,6 +101,37 @@
                     </div>
                 </div>
             </div>
+        </div>
+        
+        
+        <!-- add category modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header custom-bg text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Fill category details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form action="#">
+                      <div class="form-group">
+                          <input type="text" class="form-control" name="catTitle" placeholder="Enter category title" required />
+                      </div>
+                       <div class="form-group">
+                           <textarea style="height: 150px" class="form-control" placeholder="Enter category description" name="catDescription" required></textarea>
+                      </div>
+                      <div class="container text-center">
+                          <button class="btn btn-outline-success">Add Category</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                  </form>
+              </div>
+            </div>
+          </div>
         </div>
         
         
