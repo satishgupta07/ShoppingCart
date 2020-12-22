@@ -1,16 +1,21 @@
 package com.satishkrgupta.shopingcart.servlets;
 
 import com.satishkrgupta.shopingcart.dao.CategoryDao;
+import com.satishkrgupta.shopingcart.dao.ProductDao;
 import com.satishkrgupta.shopingcart.entities.Category;
+import com.satishkrgupta.shopingcart.entities.Product;
 import com.satishkrgupta.shopingcart.helper.FactoryProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
+@MultipartConfig
 public class ProductOperationServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -42,6 +47,37 @@ public class ProductOperationServlet extends HttpServlet {
             }
             else if(op.trim().equals("addProduct")) {
                 //add product
+                String pName = request.getParameter("pName");
+                String pDesc = request.getParameter("pDesc");
+                int pPrice = Integer.parseInt(request.getParameter("pPrice"));
+                int pDiscount = Integer.parseInt(request.getParameter("pDiscount"));
+                int pQuantity = Integer.parseInt(request.getParameter("pQuantity"));
+                int catId = Integer.parseInt(request.getParameter("catId"));
+                Part part = request.getPart("pPic");
+                
+                Product p = new Product();
+                p.setpName(pName);
+                p.setpDesc(pDesc);
+                p.setpPrice(pPrice);
+                p.setpDesc(pDesc);
+                p.setpDiscount(pDiscount);
+                p.setpQuantity(pQuantity);
+                p.setpPhoto(part.getSubmittedFileName());
+                
+                //get category by id
+                CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
+                Category category = cdao.getCategoryById(catId);
+                
+                p.setCategory(category);
+                
+                //save product
+                ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
+                pdao.saveProduct(p);
+                
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("message", "Product added successfully... ");
+                response.sendRedirect("admin.jsp");
+                return;
                 
             }
         }

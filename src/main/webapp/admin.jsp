@@ -155,7 +155,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                  <form action="ProductOperationServlet" method="post">
+                  <form action="ProductOperationServlet" method="post" enctype="multipart/form-data">
                       <input type="hidden" name="operation" value="addProduct">
                       <div class="form-group">
                           <input type="text" class="form-control" name="pName" placeholder="Enter product name" required />
