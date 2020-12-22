@@ -1,9 +1,11 @@
 package com.satishkrgupta.shopingcart.dao;
 
 import com.satishkrgupta.shopingcart.entities.Category;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class CategoryDao {
     
@@ -23,5 +25,13 @@ public class CategoryDao {
         tx.commit();
         session.close();
         return catId;
+    }
+    
+    public List<Category> getCategories() {
+        Session s = this.factory.openSession();
+        
+        Query query = s.createQuery("from Category");
+        List<Category> list= query.list();
+        return list;
     }
 }

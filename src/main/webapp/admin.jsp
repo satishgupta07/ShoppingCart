@@ -1,5 +1,7 @@
-<%@page import="com.satishkrgupta.shopingcart.entities.User"%>
-
+<%@page import="com.satishkrgupta.shopingcart.entities.Category"%>
+<%@page import="java.util.List"%>
+<%@page import="com.satishkrgupta.shopingcart.helper.FactoryProvider"%>
+<%@page import="com.satishkrgupta.shopingcart.dao.CategoryDao"%>
 <% 
     User user = (User)session.getAttribute("current-user");
     if(user==null) {
@@ -95,7 +97,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                     <div class="card">
+                     <div class="card" data-toggle="modal" data-target="#addProductModal">
                         <div class="card-body text-center">
                             <div class="container">
                                 <img style="max-width: 125px;" class="img-fluid" src="img/plus.png" alt="users">
@@ -132,6 +134,68 @@
                       </div>
                       <div class="container text-center">
                           <button class="btn btn-outline-success">Add Category</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <!-- add product modal -->
+        
+        <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header custom-bg text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Product details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form action="ProductOperationServlet" method="post">
+                      <input type="hidden" name="operation" value="addProduct">
+                      <div class="form-group">
+                          <input type="text" class="form-control" name="pName" placeholder="Enter product name" required />
+                      </div>
+                       <div class="form-group">
+                           <textarea style="height: 100px" class="form-control" placeholder="Enter product description" name="pDesc" required></textarea>
+                      </div>
+                      <div class="form-group">
+                          <input type="number" class="form-control" name="pPrice" placeholder="Product price" required />
+                      </div>
+                      <div class="form-group">
+                          <input type="number" class="form-control" name="pDiscount" placeholder="Discount on product" required />
+                      </div>
+                      <div class="form-group">
+                          <input type="number" class="form-control" name="pQuantity" placeholder="Quantity of product" required />
+                      </div>
+                      
+                      <%
+                         CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
+                         List<Category> list = cdao.getCategories();
+                      %>
+                      
+                      <div class="form-group">
+                          <select name="catId" class="form-control" id="">
+                              <option value="" disabled selected>Select Category</option>
+                              <% 
+                                for(Category c:list) {
+                              %>
+                              <option value="<%= c.getCategoryId() %>"> <%= c.getCategoryTitle() %></option>
+                              <% 
+                                  }
+                              %>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label class="form-label" for="pPic">Select Product Picture : </label>
+                          <input type="file" class="form-control" id="pPic" name="pPic" required />
+                      </div>
+                      <div class="container text-center">
+                          <button class="btn btn-outline-success">Add Product</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                   </form>
