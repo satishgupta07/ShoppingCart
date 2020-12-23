@@ -1,3 +1,4 @@
+<%@page import="com.satishkrgupta.shopingcart.helper.Helper"%>
 <%@page import="com.satishkrgupta.shopingcart.entities.Category"%>
 <%@page import="com.satishkrgupta.shopingcart.dao.CategoryDao"%>
 <%@page import="java.util.List"%>
@@ -31,21 +32,48 @@
             %>
             <!-- show categories -->
             <div class="col-md-2">
-                <h1>Number of categories is <%= clist.size() %> </h1>
+                <div class="list-group mt-4">
+                     <a href="#" class="list-group-item list-group-item-action active">
+                         Categories
+                     </a>   
                    <%
                     for(Category category : clist) {
-                        out.println(category.getCategoryTitle()+"<br>");
+                   %>    
+                   <a href="#" class="list-group-item list-group-item-action"><%= category.getCategoryTitle() %></a>
+                   <%
                     }
                    %>
+                </div>   
             </div> 
+                
             <!-- show products -->
             <div class="col-md-8">
-                <h1>Number of products is <%= list.size() %> </h1>
-                <%
-                    for(Product product:list) {
-                        out.println(product.getpName()+"<br>");
-                    }
-                %>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card-columns">
+                            <%
+                               for(Product p : list) { 
+                            %>
+                            <div class="card">
+                                <div class="container text-center">
+                                    <img class="card-img-top m-2" style="max-height: 200px; max-width: 100%; width: auto;" src="img/products/<%= p.getpPhoto() %>" alt="<%= p.getpName() %>">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= p.getpName() %></h5>
+                                    <p class="card-text"><%= Helper.get10Words(p.getpDesc()) %></p>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn custom-bg text-white">Add To Cart</button>
+                                    <button class="btn btn-secondary">₹<%= p.getpPrice() %></button>
+                                </div>
+                            </div>
+                                
+                            <%
+                                }
+                            %>    
+                        </div>
+                    </div>
+                </div>    
             </div> 
         </div>
         
