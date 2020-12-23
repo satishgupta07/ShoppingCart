@@ -5,7 +5,10 @@ import com.satishkrgupta.shopingcart.dao.ProductDao;
 import com.satishkrgupta.shopingcart.entities.Category;
 import com.satishkrgupta.shopingcart.entities.Product;
 import com.satishkrgupta.shopingcart.helper.FactoryProvider;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -73,6 +76,30 @@ public class ProductOperationServlet extends HttpServlet {
                 //save product
                 ProductDao pdao = new ProductDao(FactoryProvider.getFactory());
                 pdao.saveProduct(p);
+                
+                //pic upload
+                String path = request.getRealPath("img")+File.separator+"products"+File.separator+part.getSubmittedFileName();
+                System.out.println(path);
+                
+                try {
+                      //uploading code...
+                    FileOutputStream fos = new FileOutputStream(path);
+
+                    InputStream is = part.getInputStream();
+
+                    //reading data
+                    byte[] data = new byte[is.available()];
+
+                    is.read(data);
+
+                    //writing data
+                    fos.write(data);
+
+                    fos.close();
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute("message", "Product added successfully... ");
