@@ -1,3 +1,8 @@
+<%@page import="com.satishkrgupta.shopingcart.entities.Category"%>
+<%@page import="com.satishkrgupta.shopingcart.dao.CategoryDao"%>
+<%@page import="java.util.List"%>
+<%@page import="com.satishkrgupta.shopingcart.entities.Product"%>
+<%@page import="com.satishkrgupta.shopingcart.dao.ProductDao"%>
 <%@page import="com.satishkrgupta.shopingcart.helper.FactoryProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,12 +22,32 @@
         
         <%@include file="components/navbar.jsp" %>
         
-        <h1>Hello World!</h1>
-        <h1>Creating Session Factory object</h1>
-        
-        <% 
-            out.println(FactoryProvider.getFactory());
-        %>
+        <div class="row mt-3 mx-2">
+            <%
+                ProductDao dao = new ProductDao(FactoryProvider.getFactory());
+                List<Product> list = dao.getAllProducts();
+                CategoryDao cdao = new CategoryDao(FactoryProvider.getFactory());
+                List<Category> clist = cdao.getCategories();
+            %>
+            <!-- show categories -->
+            <div class="col-md-2">
+                <h1>Number of categories is <%= clist.size() %> </h1>
+                   <%
+                    for(Category category : clist) {
+                        out.println(category.getCategoryTitle()+"<br>");
+                    }
+                   %>
+            </div> 
+            <!-- show products -->
+            <div class="col-md-8">
+                <h1>Number of products is <%= list.size() %> </h1>
+                <%
+                    for(Product product:list) {
+                        out.println(product.getpName()+"<br>");
+                    }
+                %>
+            </div> 
+        </div>
         
          <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
