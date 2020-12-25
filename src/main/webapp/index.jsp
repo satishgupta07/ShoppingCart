@@ -18,17 +18,26 @@
         <link rel="stylesheet" href="css/style.css">
 
         <title>Shopping Cart | Home Page</title>
+        <style>
+            .discount-label {
+                font-size: 10px!important;
+                font-style: italic!important;
+            }
+            .product-card:hover {
+                background: #e2e2e2;
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
 
         <%@include file="components/navbar.jsp" %>
         <div class="container-fluid">
             <div class="row mt-3 mx-2">
-                <%                
-                    String cat = request.getParameter("category");
+                <%                    String cat = request.getParameter("category");
                     ProductDao dao = new ProductDao(FactoryProvider.getFactory());
                     List<Product> list = null;
-                    if (cat==null || cat.trim().equals("all")) {
+                    if (cat == null || cat.trim().equals("all")) {
                         list = dao.getAllProducts();
                     } else {
                         int cid = Integer.parseInt(cat.trim());
@@ -61,7 +70,7 @@
                                 <%
                                     for (Product p : list) {
                                 %>
-                                <div class="card">
+                                <div class="card product-card">
                                     <div class="container text-center">
                                         <img class="card-img-top m-2" style="max-height: 200px; max-width: 100%; width: auto;" src="img/products/<%= p.getpPhoto()%>" alt="<%= p.getpName()%>">
                                     </div>
@@ -69,9 +78,9 @@
                                         <h5 class="card-title"><%= p.getpName()%></h5>
                                         <p class="card-text"><%= Helper.get10Words(p.getpDesc())%></p>
                                     </div>
-                                    <div class="card-footer">
+                                    <div class="card-footer text-center">
                                         <button class="btn custom-bg text-white">Add To Cart</button>
-                                        <button class="btn btn-secondary">₹<%= p.getpPrice()%></button>
+                                        <button class="btn btn-outline-success">₹<%= p.getpPrice()%>/- <span class="text-secondary discount-label"><%= p.getpDiscount()%>% off</span></button>
                                     </div>
                                 </div>
 
